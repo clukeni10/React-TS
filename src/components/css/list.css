@@ -1,0 +1,36 @@
+.card {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 10px;
+
+  margin: 10px;
+  width: 200px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  background-color: white;
+
+}
+
+.card button {
+  width: 60px;
+  height: 60px;
+  padding: 10px;
+  font-size: 12px;
+  font-weight: bold;
+  background-color: red;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  color: white;
+}
+
+.card button:hover {
+  background-color: darkred;
+}
+
+.list{
+  display: 'flex';
+  flex-wrap: wrap ;
+}
