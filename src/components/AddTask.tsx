@@ -1,13 +1,17 @@
 import { useState } from "react";
 
-function AddUser ({ onAddUser }) {
-     const [users, setUsers] = useState([{ nome: "", idade: "" }]);
-      const [displayUsers, setDisplayUsers] = useState([]);
+
+type User = {
+    nome: string;
+    idade: string; 
+};
+
+function AddUser () {
+     const [users, setUsers] = useState<User[]>([{ nome: "", idade: "" }]);
+      const [displayUsers, setDisplayUsers] = useState<User[]>([]);
 
 
-
-
-      const handleInputChange = (index, field, value) => {
+      const handleInputChange = (index: number, field: keyof User, value: string) => {
         const newUsers = [...users];
         newUsers[index][field] = value;
         setUsers(newUsers);
@@ -29,7 +33,7 @@ function AddUser ({ onAddUser }) {
         setUsers([...users, { nome: "", idade: "" }]);
     };
     
-    const handleDeleteUser  = (index) => {
+    const handleDeleteUser  = (index: number) => {
         const newDisplayUsers = displayUsers.filter((_, i) => i !== index);
         setDisplayUsers(newDisplayUsers);
     };
@@ -55,7 +59,7 @@ function AddUser ({ onAddUser }) {
                     </div>
                 ))}
                 <br />
-                <button type="button" onClick={handleAddInput}>Adicionar</button>
+                <button  type="button" onClick={handleAddInput}>Adicionar</button>
                 <button type="button" onClick={handleAddUser }>Gravar</button>
             </form>
     
@@ -64,7 +68,7 @@ function AddUser ({ onAddUser }) {
                     <div key={index} className="user-card">
                         <p>Nome: {user.nome}</p>
                         <p>Idade: {user.idade}</p>
-                        <button className="bg-red-200" onClick={() => handleDeleteUser (index)}>Deletar</button>
+                        <button  onClick={() => handleDeleteUser (index)}>Deletar</button>
                     </div>
                 ))}
             </div>
