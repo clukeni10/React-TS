@@ -1,5 +1,5 @@
 import { useState } from "react";
-
+import './css/index.css';
 
 type User = {
     nome: string;
@@ -7,11 +7,10 @@ type User = {
 };
 
 function AddUser () {
-     const [users, setUsers] = useState<User[]>([{ nome: "", idade: "" }]);
-      const [displayUsers, setDisplayUsers] = useState<User[]>([]);
+    const [users, setUsers] = useState<User[]>([{ nome: "", idade: "" }]);
+    const [displayUsers, setDisplayUsers] = useState<User[]>([]);
 
-
-      const handleInputChange = (index: number, field: keyof User, value: string) => {
+    const handleInputChange = (index: number, field: keyof User, value: string) => {
         const newUsers = [...users];
         newUsers[index][field] = value;
         setUsers(newUsers);
@@ -32,6 +31,16 @@ function AddUser () {
     const handleAddInput = () => {
         setUsers([...users, { nome: "", idade: "" }]);
     };
+
+    const handleDeleteInput = (index: number) => {
+        // Não permite a exclusão do input base (índice 0)
+        if (index === 0) {
+            alert("O input base não pode ser apagado.");
+            return;
+        }
+        const newUsers = users.filter((_, i) => i !== index);
+        setUsers(newUsers);
+    };
     
     const handleDeleteUser  = (index: number) => {
         const newDisplayUsers = displayUsers.filter((_, i) => i !== index);
@@ -43,7 +52,7 @@ function AddUser () {
             <h1>Adicionar Usuários</h1>
             <form onSubmit={(e) => e.preventDefault()}>
                 {users.map((user, index) => (
-                    <div key={index}>
+                    <div key={index} className="input-group">
                         <input
                             type="text"
                             placeholder="Digite o seu nome"
@@ -56,11 +65,17 @@ function AddUser () {
                             value={user.idade}
                             onChange={(event) => handleInputChange(index, "idade", event.target.value)}
                         />
+                        {/* Exibe o botão "Apagar" apenas se o índice for maior que 0 */}
+                        {index > 0 && (
+                            <button type="button" onClick={() => handleDeleteInput(index)}>Apagar</button>
+                        )}
                     </div>
                 ))}
                 <br />
-                <button  type="button" onClick={handleAddInput}>Adicionar</button>
-                <button type="button" onClick={handleAddUser }>Gravar</button>
+                <div className="buttons">
+                    <button type="button" onClick={handleAddInput}>Adicionar</button>
+                    <button type="button" onClick={handleAddUser }>Gravar</button>
+                </div>
             </form>
     
             <div className="user-cards">
@@ -68,12 +83,12 @@ function AddUser () {
                     <div key={index} className="user-card">
                         <p>Nome: {user.nome}</p>
                         <p>Idade: {user.idade}</p>
-                        <button  onClick={() => handleDeleteUser (index)}>Deletar</button>
+                        <button onClick={() => handleDeleteUser (index)}>Deletar</button>
                     </div>
                 ))}
             </div>
         </div>
     );
-
 }
+
 export default AddUser ;
