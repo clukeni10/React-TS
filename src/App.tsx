@@ -1,30 +1,36 @@
-// App.tsx
-import React, { useState } from 'react';
-import UserForm from './components/form';
-import UserList from './components/list';
+
 import './App.css';
-import Buttons from './components/buttons';
+import AddTask from './components/AddTask';
+import { useState } from 'react';
 
-const App: React.FC = () => {
-    const [users, setUsers] = useState<{ name: string; age: number }[]>([]);
+ 
+const App = () => {
+    const [users, setUsers] = useState([{
+        id: 1,
+        nome: "test",
+        idade: 1,
+    }]);
 
-    const handleAddUser = (name: string, age: number) => {
-        setUsers([...users, { name, age }]);
-    };
+    function onAddUser(nome: string, idade: number){
+        const newUser = {
+            id: users.length + 1,
+            nome,
+            idade,
+        };
 
-    const handleRemoveUser = (index: number) => {
-        setUsers(users.filter((_, i) => i !== index)); 
-    };
+            setUsers([...users, newUser]);
+
+        }
+
 
     return (
         <div>
-          
             <h1>Gerenciador de Usuários</h1>
-            <Buttons></Buttons>
-            <UserForm onAdd={handleAddUser} />
-            <UserList users={users} onRemove={handleRemoveUser} />
+            <AddTask onAddUser={onAddUser}></AddTask>
+
+ 
         </div>
     );
-};
+}
 
 export default App;
