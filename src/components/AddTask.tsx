@@ -1,6 +1,6 @@
 import { useState } from "react";
 import './style.css'
-import { CirclePlus, Save} from "lucide-react";
+import { CirclePlus, Save, Trash2} from "lucide-react";
 
 
 type User = {
@@ -71,7 +71,7 @@ function AddUser() {
                         />
                         {/* Exibe o botão "Apagar" apenas se o índice for maior que 0 */}
                         {index > 0 && (
-                            <button className="delete" type="button" onClick={() => handleDeleteInput(index)}>Apagar</button>
+                            <button className="delete" type="button" onClick={() => handleDeleteInput(index)}><Trash2 /></button>
                         )}
                     </div>
                 ))}
@@ -87,7 +87,7 @@ function AddUser() {
                     <div key={index} className="user-card">
                         <p>Nome: {user.nome}</p>
                         <p>Idade: {user.idade}</p>
-                        <button onClick={() => handleDeleteUser(index)}>Deletar</button>
+                        <button onClick={() => handleDeleteUser(index)}><Trash2 /></button>
                     </div>
                 ))}
             </div>
