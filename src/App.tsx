@@ -25,7 +25,6 @@ const App = () => {
 
     return (
         <div>
-            <h1 className='title'>Gerenciador de Usuários</h1>
             <AddTask onAddUser={onAddUser}></AddTask>
 
  
