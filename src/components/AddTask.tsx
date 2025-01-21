@@ -1,5 +1,6 @@
 import { useState } from "react";
 import './style.css'
+import { CirclePlus, Save} from "lucide-react";
 
 
 type User = {
@@ -52,7 +53,7 @@ function AddUser() {
         <div className="Task">
             <h1 className='title'>Gerenciador de Usuários</h1>
 
-            <h1>Adicionar Usuários</h1>
+            <h2>Adicionar Usuários</h2>
             <form onSubmit={(e) => e.preventDefault()}>
                 {users.map((user, index) => (
                     <div key={index} >
@@ -77,8 +78,8 @@ function AddUser() {
             </form>
                 
                 <div className="buttons">
-                    <button type="button" onClick={handleAddInput}>Adicionar</button>
-                    <button type="button" onClick={handleAddUser}>Gravar</button>
+                    <button type="button" onClick={handleAddInput}><CirclePlus /></button>
+                    <button type="button" onClick={handleAddUser}><Save /></button>
                 </div>
 
             <div className="user-cards">
