@@ -1,7 +1,7 @@
 import { useState } from "react";
 import './style.css'
-import { CirclePlus, Save, Trash2} from "lucide-react";
-import { Flex, Heading, Input, Button, HStack, Box  } from "@chakra-ui/react"
+import { CirclePlus, Save, Trash2 } from "lucide-react";
+import { Flex, Heading, Input, Button, HStack, Box } from "@chakra-ui/react"
 
 
 type User = {
@@ -36,7 +36,6 @@ function AddUser() {
     };
 
     const handleDeleteInput = (index: number) => {
-        // Não permite a exclusão do input base (índice 0)
         if (index === 0) {
             alert("O input base não pode ser apagado.");
             return;
@@ -50,134 +49,153 @@ function AddUser() {
         setDisplayUsers(newDisplayUsers);
     };
 
+    const handleDeleteAllUsers = () => {
+        setDisplayUsers([]);
+    };
+
     return (
-        <div>
-             <Flex 
-             direction="column" 
-             align="center"
-             justifyContent="center"
-             h="100vh" 
-             >
-
-
-             
-                <Heading 
-                size="4xl"
-                fontWeight="bold"
-                textAlign="center"
-                marginBottom="2"
-                > 
-                <h1 className='title'>Gerenciador de Usuários</h1>
-                </Heading>
-        
-
-                <Heading 
-                size="2xl"
-                fontWeight="semi-bold"
-                textAlign="center"
-                marginBottom="2"
-                >
-                <h2>Adicionar Usuários</h2>
-                </Heading>
-           
-            <form onSubmit={(e) => e.preventDefault()}>
-                {users.map((user, index) => (
-                    <Flex 
-                        flexDirection="row"
-                        justifyContent="space-evenly"
-                        
-                    >
-                    <div key={index} >
-                        <Input 
-                        variant="outline"   
-                        w="200px"
-                        size="sm"
-                        margin="2"
-                            type="text"
-                            placeholder="Digite o seu nome"
-                            value={user.nome}
-                            onChange={(event) => handleInputChange(index, "nome", event.target.value)}
-                        />
-                        <Input 
-                        variant="outline"   
-                        w="200px"
-                        size="sm"
-                        margin="2"
-                            type="number"
-                            placeholder="Digite a sua idade"
-                            value={user.idade}
-                            onChange={(event) => handleInputChange(index, "idade", event.target.value)}
-                        />
-                        {/* Exibe o botão "Apagar" apenas se o índice for maior que 0 */}
-                        {index > 0 && (
-                            <Button 
-                            marginRight="2"
-                            color="red.700"
-                            bg="black"
-                            _hover={{color: "red.500"}}
-                            onClick={() => handleDeleteInput(index)}><Trash2 /></Button>
-                        )}
-                    </div>
-                    </Flex>
-                ))}
-            </form>
-                
-               <HStack  
-               display="flex"
-               justifyContent="center"
-               marginTop="2"
-               marginBlock="2"
-               gap="6" >
-                <Button 
-                bg="blue.600"
-                _hover={{bg: "blue.700"}}
-                 onClick={handleAddInput}><CirclePlus></CirclePlus></Button>
-                <Button 
-                bg="blue.600"
-                _hover={{bg: "blue.700"}}
-                onClick={handleAddUser}><Save></Save></Button>
-               </HStack>
-                
-                
-                    
-                
-
-                <div
+        <Box
+   
+        >
+            <Flex
+                direction="column"
+                align="center"
+                justifyContent="center"
+                h="100vh"
+                bg="white"
                
-                >
-                {displayUsers.map((user, index) => (
-                    <Box
-                    bg="white"
+            >
+                <Heading
+                    size="4xl"
+                    fontWeight="bold"
+                    textAlign="center"
+                    marginBottom="2"
                     color="black"
-                    borderRadius="10px"
-                    w="150px"
-                    display="flex"
-                    flexDirection="row"
-                    justifyContent="space-evenly"
-                    >
-                <div key={index} className="user-card">
-                    <div>
-                    <p>Nome: {user.nome}</p>
-                    <p>Idade: {user.idade}</p>
-                    </div>
-                        
-                        <Button
-                         color="red.700"
-                         _hover={{color: "red.500"}}
-                        onClick={() => handleDeleteUser(index)}><Trash2 />
-                        </Button>
-                        
-                        
-                    </div>
-                    </Box>
+                >
+                    <h1 className='title'>Gerenciador de Usuários</h1>
+                </Heading>
+
+                <Heading
+                    size="2xl"
+                    fontWeight="semi-bold"
+                    textAlign="center"
+                    marginBottom="2"
+                    color="black"
+                >
+                    <h2>Adicionar Usuários</h2>
+                </Heading>
+
+                <form onSubmit={(e) => e.preventDefault()}>
+                    {users.map((user, index) => (
+                        <Flex
+                            key={index}
+                            flexDirection="row"
+                            align="center"
+                            justifyContent="flex-start"
+                            gap="2"
+                            marginBottom="4"
+                        >
+                            
+                            <Input
+                                variant="outline"
+                                w="200px"
+                                size="sm"
+                                margin="2"
+                                color="black"
+                                type="text"
+                                placeholder="Digite o seu nome"
+                                value={user.nome}
+                                onChange={(event) => handleInputChange(index, "nome", event.target.value)}
+                            />
+
+                           
+                            
+                         
+                                <Input
+                                variant="outline"
+                                w="200px"
+                                size="sm"
+                                margin="2"
+                                color="black"
+                                type="number"
+                                placeholder="Digite a sua idade"
+                                value={user.idade}
+                                onChange={(event) => handleInputChange(index, "idade", event.target.value)}
+                            />
                     
-                ))}
-                </div>
-            
-            </Flex> 
-        </div>
-        
-            ) 
+                            
+                            {index > 0 && (
+                                <Button
+                                    marginRight="2"
+                                    color="red.700"
+                                    bg="white"
+                                    _hover={{ color: "red.500" }}
+                                    onClick={() => handleDeleteInput(index)}
+                                >
+                                    <Trash2 />
+                                </Button>
+                            )}
+                        </Flex>
+                    ))}
+                </form>
+
+                <HStack
+                    display="flex"
+                    marginTop="2"
+                    marginBlock="2"
+                    gap="6" >
+                    <Button
+                        bg="blue.600"
+                        _hover={{ bg: "blue.700" }}
+                        onClick={handleAddInput}><CirclePlus color="white"></CirclePlus></Button>
+                    <Button
+                        bg="blue.600"
+                        _hover={{ bg: "blue.700" }}
+                        onClick={handleAddUser}><Save color="white"></Save></Button>
+                    <Button
+                        bg="red.600"
+                        _hover={{ bg: "red.700" }}
+                        onClick={handleDeleteAllUsers}><Trash2 color="white"></Trash2></Button>
+                </HStack>
+
+                <Box
+                    display="flex"
+                    width="350px"
+                    flexDirection="row"
+                    flexWrap="wrap"
+                    justifyContent="space-evenly"
+                >
+                    {displayUsers.map((user, index) => (
+                        <Box
+                            key={index}
+                            bg="white"
+                            color="black"
+                            borderRadius="md"
+                            w="150px"
+                            display="flex"
+                            flexDirection="row"
+                            justifyContent="space-evenly"
+                            borderColor="blue.500"
+                            borderWidth="1px"
+                            margin="2"
+                        >
+                            <div className="user-card">
+                                <div>
+                                    <p>Nome: {user.nome}</p>
+                                    <p>Idade: {user.idade}</p>
+                                </div>
+                                <Button
+                                    color="red.700"
+                                    _hover={{ color: "red.500" }}
+                                    onClick={() => handleDeleteUser(index)}><Trash2 />
+                                </Button>
+                            </div>
+                        </Box>
+                    ))}
+                </Box>
+            </Flex>
+        </Box>
+    )
 };
 
 export default AddUser;
