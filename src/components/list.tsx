@@ -47,7 +47,11 @@ const UserList = ({ displayUsers, setDisplayUsers }: UserListProps) => {
               </Button>
             </>
           ) : (
-            <>
+            <Box
+              color = "black"
+              rounded= "md"
+              border="none"
+            >
             
               <p>Nome: {user.nome}</p>
               <p>Idade: {user.idade}</p>
@@ -57,7 +61,7 @@ const UserList = ({ displayUsers, setDisplayUsers }: UserListProps) => {
               <Button color="red.700" _hover={{ color: "red.500" }} onClick={() => handleDeleteUser(index)}>
                 <Trash2 />
               </Button>
-            </>
+            </Box>
           )}
         </Box>
       ))}
