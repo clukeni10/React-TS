@@ -1,19 +1,45 @@
 import Header from './userManagerHeader';
 import Menu from './userManagerMenu';
 import UserCard from './userManagerUserCard';
-import { Box } from '@chakra-ui/react';
+import { Box, Grid, GridItem } from '@chakra-ui/react';
+
+
 
 function userManager() {
     return (
-        <Box 
-        bg="aliceblue"
-        
+        <Box
+            bg="aliceblue"
+
         >
-            <Header />
+            <Grid
+                templateAreas={`"header header"
+                     "nav main"
+                     `}
+                gridTemplateRows={"30px 1fr 30px"}
+                gridTemplateColumns={"250px auto"}
+                gap={8}
+            >
+                <GridItem area={"header"}>
+                    <Header />
+                </GridItem>
 
-            <Menu />
+                <GridItem area={"nav"}>
+                <Menu />
+                    
+                    
+                </GridItem>
 
-            <UserCard/>
+                <GridItem area={"main"}>
+                    <UserCard />
+                </GridItem>
+
+
+
+
+
+
+            </Grid>
+
         </Box>
 
     )
