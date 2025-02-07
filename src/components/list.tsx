@@ -29,7 +29,7 @@ const UserList = ({ displayUsers, setDisplayUsers }: UserListProps) => {
       {displayUsers.map((user, index) => (
         <Box key={index} bg="white" w="150px" borderWidth="1px" margin="2" padding="2">
           {user.isEditing ? (
-            <>
+            <Box>
               <Input
                 size="sm"
                 marginBottom="2"
@@ -45,7 +45,7 @@ const UserList = ({ displayUsers, setDisplayUsers }: UserListProps) => {
               <Button bg="green.600" _hover={{ bg: "green.700" }} onClick={() => handleEditUser(index)}>
                 Salvar
               </Button>
-            </>
+            </Box>
           ) : (
             <Box
               color = "black"

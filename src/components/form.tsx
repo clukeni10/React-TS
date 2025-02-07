@@ -23,9 +23,17 @@ const UserForm = ({ users, setUsers }: UserFormProps) => {
   };
 
   return (
-    <form onSubmit={(e) => e.preventDefault()}>
+    <form onSubmit={(e) => e.preventDefault()} >
       {users.map((user, index) => (
-        <Flex key={index} align="center" gap="2" marginBottom="4">
+        <Flex 
+        key={index} 
+        gap="2" 
+        marginBottom="4"
+        justifyContent="center"
+        alignItems="center"
+        p="5"
+
+        >
           <Input
             variant="outline"
             w="200px"
@@ -49,7 +57,11 @@ const UserForm = ({ users, setUsers }: UserFormProps) => {
               <Trash2 />
             </Button>
           )}
+
+          
         </Flex>
+
+        
       ))}
     </form>
   );

@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { Box, Flex, HStack, Button } from "@chakra-ui/react";
 import { CirclePlus, Save, Trash2 } from "lucide-react";
-import Header from "../components/header";
 import UserForm from "../components/form";
 import UserList from "../components/list";
 import { User } from "../components/types/user";
@@ -29,7 +28,7 @@ function AddUser() {
   return (
     <Box>
       <Flex direction="column" align="center" justifyContent="center" h="100vh" bg="white">
-        <Header />
+
 
         <UserForm users={users} setUsers={setUsers} />
 

@@ -1,10 +1,20 @@
-import UserManager from './components/userManager';
-import { Box } from '@chakra-ui/react';
+
+import AddUser from './components/AddTask';
+import { Box  } from '@chakra-ui/react';
+import Header from "./components/header";
+
+
 
 function App() {
+
+    
   return (
-    <Box>
-      <UserManager />
+    <Box
+    bg="white"
+    >
+      <Header></Header>
+      <AddUser></AddUser>
+
     </Box>
   );
 }
