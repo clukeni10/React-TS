@@ -10,7 +10,7 @@ type UserFormProps = {
 const UserForm = ({ users, setUsers }: UserFormProps) => {
   const handleInputChange = (index: number, field: keyof User, value: string) => {
     const newUsers = [...users];
-    newUsers[index][field] = value;
+    newUsers[index] = { ...newUsers[index], [field]: value };
     setUsers(newUsers);
   };
 

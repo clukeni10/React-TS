@@ -1,6 +1,7 @@
 import { Box, Input, Button } from "@chakra-ui/react";
 import { Trash2, Edit3 } from "lucide-react";
-import { User } from "./types/user";
+import { deleteUser, updateUser } from "./bd";
+import {User} from './types/user'
 
 type UserListProps = {
   displayUsers: (User & { isEditing?: boolean })[];
@@ -14,14 +15,19 @@ const UserList = ({ displayUsers, setDisplayUsers }: UserListProps) => {
     setDisplayUsers(newDisplayUsers);
   };
 
-  const handleSaveEdit = (index: number, field: keyof User, value: string) => {
+  const handleSaveEdit = async (index: number, field: keyof User, value: string) => {
     const newDisplayUsers = [...displayUsers];
-    newDisplayUsers[index][field] = value;
+    newDisplayUsers[index] = { ...newDisplayUsers[index], [field]: value };
     setDisplayUsers(newDisplayUsers);
+    await updateUser(newDisplayUsers[index]);
   };
 
-  const handleDeleteUser = (index: number) => {
-    setDisplayUsers(displayUsers.filter((_, i) => i !== index));
+  const handleDeleteUser = async (index: number) => {
+    const user = displayUsers[index];
+    if (user.id !== undefined) {
+      await deleteUser(user.id);
+      setDisplayUsers(displayUsers.filter((_, i) => i !== index));
+    }
   };
 
   return (
@@ -29,7 +35,7 @@ const UserList = ({ displayUsers, setDisplayUsers }: UserListProps) => {
       {displayUsers.map((user, index) => (
         <Box key={index} bg="white" w="150px" borderWidth="1px" margin="2" padding="2">
           {user.isEditing ? (
-            <Box>
+            <>
               <Input
                 size="sm"
                 marginBottom="2"
@@ -45,14 +51,9 @@ const UserList = ({ displayUsers, setDisplayUsers }: UserListProps) => {
               <Button bg="green.600" _hover={{ bg: "green.700" }} onClick={() => handleEditUser(index)}>
                 Salvar
               </Button>
-            </Box>
+            </>
           ) : (
-            <Box
-              color = "black"
-              rounded= "md"
-              border="none"
-            >
-            
+            <Box color="black">
               <p>Nome: {user.nome}</p>
               <p>Idade: {user.idade}</p>
               <Button color="blue.700" _hover={{ color: "blue.500" }} onClick={() => handleEditUser(index)}>
